@@ -1,9 +1,8 @@
-import React from 'react'
 
 export const Vision = () => {
   return (
-    <div id='#vision'>
-      <h1>Vision</h1>  
+    <div id="vision" className="w-full h-screen bg-slate-200">
+      <h1>Vision del Club</h1>  
     </div>
   )
 }
