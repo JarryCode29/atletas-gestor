@@ -1,6 +1,6 @@
   'use client'
   import Link from "next/link";
-  import { useState, useEffect } from "react";
+  import { useRef,useState, useEffect } from "react";
   import { usePathname } from "next/navigation";
 
   interface LinkItem {
@@ -10,25 +10,36 @@
 
 
   export const NavHome = () => {
+
+    const [isIntersecting, setIsIntersecting] = useState(false);
+    const [isMenuOpen, setMenuOpen] = useState(false);
     const pathname = usePathname();
-      const links: LinkItem[] = [
+    const navRef = useRef<HTMLDivElement>(null);
+
+    const links: LinkItem[] = [
           {href: '#home', text: 'Inicio'},
           {href: '#about', text: 'Quienes Somos'},
           {href: '#vision', text: 'Vision del Club'},
           {href: '#gallery', text: 'Galeria'},
       ];
 
-      const [isMenuOpen, setMenuOpen] = useState(false);
-      const [isScrolled, setIsScrolled] = useState(false);
-
       useEffect(() => {
-        const handleScroll = () => {
-            const scrolled = window.scrollY > 0;
-            setIsScrolled(scrolled);
-        };
-        window.addEventListener('scroll', handleScroll);
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsIntersecting(entry.isIntersecting);
+            },
+            { threshold: 0 }
+        );
+        const currentNavRef = navRef.current;
+
+        if (currentNavRef) {
+            observer.observe(currentNavRef);
+        }
+
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            if (currentNavRef) {
+                observer.unobserve(currentNavRef);
+            }
         };
     }, []);
     
@@ -36,15 +47,20 @@
 
       return (
           <>
-              <nav className={`bg-black p-4 transition duration-500 ${isScrolled ? 'fixed bg-gray-400 w-full transition duration-300 bg-opacity-20 text-black' : ''}`}>
+            <nav
+                ref={navRef}
+                className={`p-4 ${isIntersecting ? 'fixed bg-red-500 opacity-90 w-full' : ''}`}
+            >
                   <div className="flex items-center justify-between">
                       <Link href="/">
-                          <p className={`text-white font-bold text-xl ${isScrolled ? 'text-back': ''} `}>JP</p>
+                          <p className="text-white font-bold text-[34px]">JP</p>
                       </Link>
                       <div className="lg:hidden">
                           <button
                               onClick={() => setMenuOpen(!isMenuOpen)}
                               className="text-white focus:outline-none"
+
+                              style={{ position: "absolute", right: "10px", top: "10px" }}
                           >
                               <svg
                                   className="w-6 h-6"
@@ -64,11 +80,12 @@
                       </div>
                       <ul
                           className={`${
-                              isMenuOpen ? 'block' : 'hidden'
+                              isMenuOpen ? 'block absolute top-full' : 'hidden'
                           } lg:flex lg:space-x-4 lg:items-center text-white`}
+                          style={{ marginTop: "1.5rem" }}
                       >
                           {links.map((link, page) => (
-                              <li key={page} className={`transition duration-300 px-2 py-1 rounded ${
+                              <li key={page} className={`transition duration-300 px-2 py-1 rounded text-[24px]${
                                 pathname === link.href ? 'bg-gray-700': ''
                                 }`}>
                                   <Link href={link.href}>
