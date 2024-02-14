@@ -46,56 +46,59 @@
 
 
       return (
-          <>
-            <nav
-                ref={navRef}
-                className={`p-4 ${isIntersecting ? 'fixed bg-red-500 opacity-90 w-full' : ''}`}
+        <>
+        <nav
+          ref={navRef}
+          className={`p-4 ${isIntersecting ? 'fixed bg-red-500 opacity-90 w-full' : ''}`}
+        >
+          <div className="relative flex items-center justify-between">
+            <Link href="/">
+              <p className="text-white font-bold text-2xl sm:text-3xl md:text-4xl">JP</p>
+            </Link>
+            <div className="lg:hidden">
+              <button
+                onClick={() => setMenuOpen(!isMenuOpen)}
+                className="text-white focus:outline-none"
+                style={{ position: "relative",  zIndex: "999" }}
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <ul
+              className={`${
+                isMenuOpen ? 'block absolute top-full right-0' : 'hidden'
+              } lg:flex lg:space-x-4 lg:items-center text-white`}
+              style={{ marginTop: "1.5rem" }}
             >
-                  <div className="flex items-center justify-between">
-                      <Link href="/">
-                          <p className="text-white font-bold text-[34px]">JP</p>
-                      </Link>
-                      <div className="lg:hidden">
-                          <button
-                              onClick={() => setMenuOpen(!isMenuOpen)}
-                              className="text-white focus:outline-none"
-
-                              style={{ position: "absolute", right: "10px", top: "10px" }}
-                          >
-                              <svg
-                                  className="w-6 h-6"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                              >
-                                  <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth="2"
-                                      d="M4 6h16M4 12h16m-7 6h7"
-                                  ></path>
-                              </svg>
-                          </button>
-                      </div>
-                      <ul
-                          className={`${
-                              isMenuOpen ? 'block absolute top-full' : 'hidden'
-                          } lg:flex lg:space-x-4 lg:items-center text-white`}
-                          style={{ marginTop: "1.5rem" }}
-                      >
-                          {links.map((link, page) => (
-                              <li key={page} className={`transition duration-300 px-2 py-1 rounded text-[24px]${
-                                pathname === link.href ? 'bg-gray-700': ''
-                                }`}>
-                                  <Link href={link.href}>
-                                      {link.text}
-                                  </Link>
-                              </li>
-                          ))}
-                      </ul>
-                  </div>
-              </nav>
-          </>
+              {links.map((link, page) => (
+                <li
+                  key={page}
+                  className={`transition duration-300 px-2 py-1 rounded text-xl sm:text-2xl md:text-3xl ${
+                    pathname === link.href ? 'bg-gray-700' : ''
+                  }`}
+                >
+                  <Link href={link.href}>{link.text}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+      </>
+      
+      
+      
       );
   };
