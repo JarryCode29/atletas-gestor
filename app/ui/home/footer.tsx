@@ -49,22 +49,22 @@ export const Footer = () => {
   }
   return (
     <>
-    <h2 className='flex justify-center text-bold text-5xl md:text-7xl text-center hover:animate-bounce hover:text-sky-500 cursor-pointer'>Contáctanos</h2>
-    <div className='h-auto md:h-40 w-full bg-slate-900 flex flex-wrap justify-center items-center cursor-pointer p-5 md:p-0 sm:w-full'>
+    <h2 className='flex justify-center text-bold text-5xl  text-center hover:animate-bounce hover:text-sky-500 cursor-pointer'>Contáctanos</h2>
+    <div className='h-auto md:h-40 w-full bg-slate-900 flex flex-wrap justify-center items-center cursor-pointer p-5 '>
       <EmailComponent email="juaquinperez@gmail.com" />
       <div
         onClick={handleLocationClick}
-        className='flex items-center text-base sm:text-xl md:text-2xl lg:text-3xl gap-3 mr-3 text-indigo-50 hover:text-zinc-700'>
+        className='flex items-center text-base   gap-3 mr-3 text-indigo-50 hover:text-zinc-700'>
         <MdLocationOn /> <p>Dirección</p>
       </div>
       <div
         onClick={handlePhoneCopy}
-        className='flex items-center text-base sm:text-xl md:text-2xl lg:text-3xl gap-3 mr-3 text-indigo-50 hover:text-zinc-700'>
+        className='flex items-center text-base  gap-3 mr-3 text-indigo-50 hover:text-zinc-700'>
         <FaPhoneSquareAlt /> <p>{isPhoneCopy ? 'Copiado' : '+1 (829) 750-9632'}</p>
       </div>
       <div
         onClick={handleIgClick}
-        className='flex items-center text-base sm:text-xl md:text-2xl lg:text-3xl gap-3 mr-3 text-indigo-50 hover:text-zinc-700'>
+        className='flex items-center text-base  gap-3 mr-3 text-indigo-50 hover:text-zinc-700'>
         <TiSocialInstagram /> <p>@club_joaquin_perez</p>
       </div>
     </div>

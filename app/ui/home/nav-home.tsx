@@ -49,16 +49,16 @@
         <>
         <nav
           ref={navRef}
-          className={`p-4 ${isIntersecting ? 'fixed bg-red-500 opacity-90 w-full' : ''}`}
+          className={`h-[60px] ${isIntersecting ? 'fixed bg-red-500 opacity-90 w-full' : ''}`}
         >
           <div className="relative flex items-center justify-between">
             <Link href="/">
-              <p className="text-white font-bold text-2xl sm:text-3xl md:text-4xl">JP</p>
+              <p className="text-white font-bold text-2xl mt-4 ml-3">JP</p>
             </Link>
             <div className="lg:hidden">
               <button
                 onClick={() => setMenuOpen(!isMenuOpen)}
-                className="text-white focus:outline-none"
+                className="text-white focus:outline-none mt-5"
                 style={{ position: "relative",  zIndex: "999" }}
               >
                 <svg
@@ -78,15 +78,15 @@
               </button>
             </div>
             <ul
-              className={`${
-                isMenuOpen ? 'block absolute top-full right-0' : 'hidden'
-              } lg:flex lg:space-x-4 lg:items-center text-white`}
-              style={{ marginTop: "1.5rem" }}
-            >
+          className={`${
+            isMenuOpen ? 'block absolute top-full right-0  lg:w-full' : 'hidden'
+          } lg:flex lg:space-x-4 lg:items-center text-white bg-red-500 lg:bg-transparent`}
+          
+        >
               {links.map((link, page) => (
                 <li
                   key={page}
-                  className={`transition duration-300 px-2 py-1 rounded text-xl sm:text-2xl md:text-3xl ${
+                  className={`transition duration-300 px-2 py-1 rounded text-xl ${
                     pathname === link.href ? 'bg-gray-700' : ''
                   }`}
                 >

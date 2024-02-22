@@ -12,8 +12,8 @@ import 'swiper/css/navigation'
 
 export const Slider = () => {
     return (
-        <section className='py-12'>
-          <div className='container'>
+        <section className='py-12 lg:w-full'>
+          <div className='container lg:w-full'>
             <Swiper
               navigation
               pagination={{ type: 'fraction' }}
