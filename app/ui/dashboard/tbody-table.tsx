@@ -1,28 +1,21 @@
 
 import React from 'react'
-import * as db from "../../lib/db"
+import  {query, RowData} from "../../lib/db"
 
 
-interface RowData {
-  id: number;
-  nombre_completo: string;
-  genero: string;
-  direccion: string;
-  numero_telefono: string;
-  activo: boolean;
-}
+
 
 interface Props {
   data: RowData[];
 }
 
-interface DbModule {
-  query: (query: string, callback: (error: Error | null, results?: any) => void) => void;
-  // Otros métodos y propiedades de db si los hay
-}
-const dbInstance = module as unknown as DbModule;
+
+
 export const TbodyTable: React.FC<Props> = ({ data }) => {
-   
+  console.log(data)
+  if (!data) {
+    return <tbody>No hay datos disponibles</tbody>;
+  }
   return (
    <>
      <tbody className="bg-white">
@@ -56,23 +49,3 @@ export const TbodyTable: React.FC<Props> = ({ data }) => {
 }
 
 
-export async function getServerSideProps(): Promise<{ props: { datos: any } }> {
-  // Realiza la consulta a la base de datos
-  const query = 'SELECT * FROM mi_tabla';
-  const datos = await new Promise((resolve, reject) => {
-    dbInstance.query(query, (error, results) => {
-      if (error) {
-        console.error("Error al ejecutar la consulta:", error);
-        reject(error);
-        return;
-      }
-      console.log("Datos recibidos de la base de datos:", results);
-      resolve(results);
-    });
-  });
-  return {
-    props: {
-      datos
-    }
-  };
-}
