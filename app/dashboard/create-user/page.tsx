@@ -18,5 +18,5 @@ export default async function Page({
     <main>
       <h1>Create user</h1>
     </main>
-  );
+  )
 }

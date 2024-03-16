@@ -1,5 +1,6 @@
-import mysql, { Pool, RowDataPacket } from 'mysql2/promise';
-import * as dotenv from 'dotenv';
+import mysql from 'mysql2/promise';
+import {  Pool ,RowDataPacket } from 'mysql2/promise'
+import * as dotenv from 'dotenv'
 
 // Carga las variables de entorno desde el archivo .env
 dotenv.config();
@@ -26,11 +27,19 @@ export interface DataBaseAtletas extends RowDataPacket {
 }
 
 const pool = mysql.createPool({
+  
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+
+  
+  
 });
+console.log(process.env.DB_HOST);
+console.log(process.env.DB_USER);
+console.log(process.env.DB_PASSWORD);
+console.log(process.env.DB_NAME);
 
 export const GetAtletas = async (): Promise<DataBaseAtletas[]> => {
   const connection = await pool.getConnection();
